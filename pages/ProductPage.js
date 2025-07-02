@@ -1,4 +1,6 @@
 const { BasePage } = require('../pages/BasePage');
+const { Utilities } = require('../utilities/scrollElemet');
+
 
 exports.ProductPage = class ProductPage {
     constructor(I) {
@@ -12,10 +14,10 @@ exports.ProductPage = class ProductPage {
 
     //Add product to Cart
     async addProductToCart(productName) {
-        const basePage = new BasePage(this.I);
+        const scroll_Utility = new Utilities(this.I);
         const productXpath = `//android.widget.TextView[@content-desc="test-Item title" and contains(@text,"${productName}")]`;
         await this.I.click(productXpath)
-        await basePage.scrollToElement(this.textBtnAddCart)
+        await scroll_Utility.scrollToElement(this.textBtnAddCart)
         await this.I.waitForElement(this.btnAddCart, 3);
         await this.I.click(this.btnAddCart)
     } 

@@ -50,8 +50,8 @@ exports.config = {
     pauseOnFail: {
       enabled: true
     },
-    allure: {
-      enabled: true
-    }
+    // allure: {
+    //   enabled: true,
+    // },
   }
 };

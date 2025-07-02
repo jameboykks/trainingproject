@@ -6,7 +6,6 @@ Feature('Login');
 
 //Login successfull
 Scenario('User login successfull and see Product page', async ({ I }) => {
-    console.log("lalala")
     const username = 'standard_user'
     const pass = 'secret_sauce'
     // I.fillField('~test-Username', 'standard_user');

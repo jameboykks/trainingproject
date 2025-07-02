@@ -1,4 +1,5 @@
 const { BasePage } = require('../pages/BasePage');
+const {Utilities} = require('../utilities/scrollElemet')
 
 exports.CheckoutPage = class CheckoutPage {
     constructor(I) {
@@ -18,13 +19,13 @@ exports.CheckoutPage = class CheckoutPage {
     }
 
     async performCheckout(firstName, lastName, zipCode) {
-        const basePage = new BasePage(this.I);
+        const scroll_Utility = new Utilities(this.I);
         await this.I.fillField(this.firstNameField, firstName);
         await this.I.fillField(this.lastNameField, lastName);
         await this.I.fillField(this.zipCodeField, zipCode);
         await this.I.click(this.btnContinue);
 
-        await basePage.scrollToElement(this.btnFinish) // scroll truoc roi moi wait for
+        await scroll_Utility.scrollToElement(this.btnFinish) // scroll truoc roi moi wait for
         await this.I.waitForElement(this.btnFinish, 5);
         await this.I.click(this.btnFinish)
     }

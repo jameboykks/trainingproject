@@ -1,42 +1,43 @@
-const { BasePage } = require('../pages/BasePage');
-const { Utilities } = require('../utilities/scrollElemet');
+const locators = require('../common/locators');
+const { ScrollUtils } = require('../utilities/scrollElemet');
+const { LoginPage } = require('./LoginPage');
 
 
-exports.ProductPage = class ProductPage {
+exports.ProductPage = class ProductPage extends LoginPage {
     constructor(I) {
-        this.I = I
-        this.items = '~test-Item title'
-        this.btnAddCart = '~test-ADD TO CART'   
-        this.textBtnAddCart = '//android.widget.TextView[@text="ADD TO CART"]'
-        this.cartCount = '//android.view.ViewGroup[@content-desc="test-Cart"]//android.view.ViewGroup//android.widget.TextView'
-        this.btnCartIcon = '~test-Cart'
+        super(I)
     }
 
     //Add product to Cart
     async addProductToCart(productName) {
-        const scroll_Utility = new Utilities(this.I);
         const productXpath = `//android.widget.TextView[@content-desc="test-Item title" and contains(@text,"${productName}")]`;
         await this.I.click(productXpath)
-        await scroll_Utility.scrollToElement(this.textBtnAddCart)
-        await this.I.waitForElement(this.btnAddCart, 3);
-        await this.I.click(this.btnAddCart)
+        await ScrollUtils.scrollToElement(this.I,locators.productsPage.textBtnAddCart)
+        await this.I.waitForElement(locators.productsPage.btnAddCart, 3);
+        await this.I.click(locators.productsPage.btnAddCart)
     } 
 
     // Go to Cart Page
     async goToCart() {
-        await this.I.click(this.btnCartIcon)
+        await this.I.click(locators.productsPage.btnCartIcon)
     }
 
     // Get product volumn in cart
-    async getCartVolumn() {
-        const isVisible = await this.I.grabNumberOfVisibleElements(this.cartCount);
+    async getCartVolume() {
+        const isVisible = await this.I.grabNumberOfVisibleElements(locators.productsPage.cartCount);
 
         if (isVisible > 0) {
-            const count = await this.I.grabTextFrom(this.cartCount);
+            const count = await this.I.grabTextFrom(locators.productsPage.cartCount);
             return count
         }
         else {
             return '0'
         }
+    }
+
+    // Thêm hàm kiểm tra riêng
+    async isCartVolumeEqual(expectedCount) {
+        const actualCount = await this.getCartVolume();
+        return actualCount === expectedCount;
     }
 } 

@@ -27,11 +27,17 @@ exports.config = {
         appWaitDuration: 60000,
         restart: false,
       }
-    }
+    },
+    // CustomLoginHelper: {
+    //   require: './helpers/CustomLoginHelper.js'
+    // }
   },
 
   include: {
     I: './steps_file.js'
+  },
+  hooks: {
+    'test.before': './tests/hooks/login_hook.js'
   },
   mocha: {
     reporterOptions: {

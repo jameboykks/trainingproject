@@ -1,30 +1,29 @@
-exports.LoginPage = class LoginPage {
+
+const { BasePage } = require('./BasePage');
+const locators = require('../common/locators');
+
+exports.LoginPage = class LoginPage extends BasePage {
     constructor(I) {
-        this.I = I,
-        this.usernameField = '~test-Username'
-        this.passwordField = '~test-Password'
-        this.btnLogin = '~test-LOGIN'
-        this.msgErr = '//android.widget.TextView[contains(@text, "Username and password do not match")]'
-        this.headingProductPage = '//android.widget.TextView[@text="PRODUCTS"]' 
+        super(I);
     }
 
     async login(username, password) {
-        await this.I.fillField(this.usernameField, username);
-        await this.I.fillField(this.passwordField, password);
-        await this.I.click(this.btnLogin)
+        await this.fillField(locators.loginPage.usernameField, username);
+        await this.fillField(locators.loginPage.passwordField, password);
+        await this.click(locators.loginPage.btnLogin);
     }
 
     // get heading PRODUCTS
     async getHeadingProductPage() {
-        await this.I.waitForElement(this.headingProductPage, 5);
-        const heading = await this.I.grabTextFrom(this.headingProductPage);
-        return heading
+        await this.I.waitForElement(locators.loginPage.headingProductPage, 5);
+        const heading = await this.I.grabTextFrom(locators.loginPage.headingProductPage);
+        return heading;
     }
     
     // get err message when login failed
     async getMessageErr() {
-        await this.I.waitForElement(this.msgErr, 20);
-        const msgErr = await this.I.grabTextFrom(this.msgErr)
-        return msgErr
+        await this.I.waitForElement(locators.loginPage.msgErr, 20);
+        const msgErr = await this.I.grabTextFrom(locators.loginPage.msgErr);
+        return msgErr;
     }
 }

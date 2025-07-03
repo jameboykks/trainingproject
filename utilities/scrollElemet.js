@@ -1,11 +1,6 @@
-exports.Utilities = class Utilities {
-    constructor(I) {
-        this.I = I
-    }
-
+exports.ScrollUtils = class ScrollUtils {
     //Scroll để thấy element có XPath `xpath`, tối đa `maxScrolls` lần
-    async scrollToElement(xpath, maxScrolls = 5) {
-        const I = this.I;
+    static async scrollToElement(I,xpath, maxScrolls = 5) {   
         for (let i = 0; i < maxScrolls; i++) {
         const isVisible = await I.grabNumberOfVisibleElements(xpath);
         if (isVisible > 0) {

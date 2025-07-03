@@ -1,18 +1,17 @@
-exports.LogoutPage = class LogoutPage {
-    constructor(I) {
-        this.I = I,
-        this.btnMenu = '~test-Menu'
-        this.btnLogout ='~test-LOGOUT'
-        this.idLoginPage = 'com.swaglabsmobileapp:id/action_bar_root'
-    }
+const { ProductPage } = require("./ProductPage")
+const locators = require('../common/locators');
 
-    async logout() {
-        await this.I.click(this.btnMenu)
-        await this.I.waitForElement(this.btnLogout, 5);
-        await this.I.click(this.btnLogout)
+exports.LogoutPage = class LogoutPage extends ProductPage {
+    constructor(I) {
+        super(I);
+    }
+    async logout() { 
+        await this.I.click(locators.logoutPage.btnMenu)
+        await this.I.waitForElement(locators.logoutPage.btnLogout, 5);
+        await this.I.click(locators.logoutPage.btnLogout)
     }
     async isLoginPageDisplay() {
-        return this.I.seeElement({ id: this.idLoginPage });
+        return this.I.seeElement({ id: locators.logoutPage.idLoginPage });
     }
 
 }

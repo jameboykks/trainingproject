@@ -1,36 +1,29 @@
-const { BasePage } = require('../pages/BasePage');
-const {Utilities} = require('../utilities/scrollElemet')
+const locators = require('../common/locators');
+const {ScrollUtils} = require('../utilities/scrollElemet');
+const { ProductPage } = require('./ProductPage');
 
-exports.CheckoutPage = class CheckoutPage {
+exports.CheckoutPage = class CheckoutPage extends ProductPage {
     constructor(I) {
-        this.I = I;
-        this.btnCheckout = '//android.widget.TextView[@text="CHECKOUT"]'
-        this.firstNameField = '~test-First Name'
-        this.lastNameField = '~test-Last Name'
-        this.zipCodeField = '~test-Zip/Postal Code'
-        this.btnContinue = '//android.widget.TextView[@text="CONTINUE"]'
-        this.btnFinish = '~test-FINISH'
-        this.msgOrderSuccess = '//android.widget.TextView[@text="THANK YOU FOR YOU ORDER"]'
+        super(I)
     }
     
     async gotoCheckout() {
-        await this.I.waitForElement(this.btnCheckout, 5);
-        await this.I.click(this.btnCheckout)
+        await this.I.waitForElement(locators.checkoutPage.btnCheckout, 5);
+        await this.I.click(locators.checkoutPage.btnCheckout)
     }
 
     async performCheckout(firstName, lastName, zipCode) {
-        const scroll_Utility = new Utilities(this.I);
-        await this.I.fillField(this.firstNameField, firstName);
-        await this.I.fillField(this.lastNameField, lastName);
-        await this.I.fillField(this.zipCodeField, zipCode);
-        await this.I.click(this.btnContinue);
+        await this.I.fillField(locators.checkoutPage.firstNameField, firstName);
+        await this.I.fillField(locators.checkoutPage.lastNameField, lastName);
+        await this.I.fillField(locators.checkoutPage.zipCodeField, zipCode);
+        await this.I.click(locators.checkoutPage.btnContinue);
 
-        await scroll_Utility.scrollToElement(this.btnFinish) // scroll truoc roi moi wait for
-        await this.I.waitForElement(this.btnFinish, 5);
-        await this.I.click(this.btnFinish)
+        await ScrollUtils.scrollToElement(this.I, locators.checkoutPage.btnFinish) // scroll truoc roi moi wait for
+        await this.I.waitForElement(locators.checkoutPage.btnFinish, 5);
+        await this.I.click(locators.checkoutPage.btnFinish)
     }
 
     async isCheckoutSuccess() {
-        return await this.I.grabTextFrom(this.msgOrderSuccess);
+        return await this.I.grabTextFrom(locators.checkoutPage.msgOrderSuccess);
     }
 }

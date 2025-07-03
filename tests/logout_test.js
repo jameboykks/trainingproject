@@ -1,5 +1,5 @@
 const { LogoutPage } = require('../pages/LogoutPage');
-const Common = require('../common/Common')
+const {Common} = require('../common/Common')
 
 Feature('Logout');
 

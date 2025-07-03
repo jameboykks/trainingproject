@@ -5,9 +5,11 @@ module.exports = {
     usernameField : '~test-Username',
     passwordField : '~test-Password',
     btnLogin : '~test-LOGIN',
-    msgErr : '//android.widget.TextView[contains(@text, "Username and password do not match")]',
+    msgErr: '//android.view.ViewGroup[@content-desc="test-Error message"]/android.widget.TextView',
     headingProductPage : '//android.widget.TextView[@text="PRODUCTS"]' ,
+
   },
+  
 
   // ProductPage locator
   productsPage: {
@@ -16,6 +18,7 @@ module.exports = {
     textBtnAddCart : '//android.widget.TextView[@text="ADD TO CART"]',
     cartCount : '//android.view.ViewGroup[@content-desc="test-Cart"]//android.view.ViewGroup//android.widget.TextView',
     btnCartIcon : '~test-Cart',
+    btnBackToProduct: '~test-BACK TO PRODUCTS'
   },
 
   // CheckoutPage locator
@@ -27,6 +30,7 @@ module.exports = {
     btnContinue : '//android.widget.TextView[@text="CONTINUE"]',
     btnFinish : '~test-FINISH',
     msgOrderSuccess : '//android.widget.TextView[@text="THANK YOU FOR YOU ORDER"]',
+    msgErr: '//android.view.ViewGroup[@content-desc="test-Error message"]/android.widget.TextView'
   },
 
   // LogoutPage locator

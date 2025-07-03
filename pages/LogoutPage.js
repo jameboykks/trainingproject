@@ -6,9 +6,9 @@ exports.LogoutPage = class LogoutPage extends ProductPage {
         super(I);
     }
     async logout() { 
-        await this.I.click(locators.logoutPage.btnMenu)
-        await this.I.waitForElement(locators.logoutPage.btnLogout, 5);
-        await this.I.click(locators.logoutPage.btnLogout)
+        await this.click(locators.logoutPage.btnMenu)
+        await this.waitForVisible(locators.logoutPage.btnLogout, 5);
+        await this.click(locators.logoutPage.btnLogout)
     }
     async isLoginPageDisplay() {
         return this.I.seeElement({ id: locators.logoutPage.idLoginPage });

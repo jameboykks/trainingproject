@@ -9,7 +9,14 @@ module.exports = {
       username: 'invalid_user',
       password: 'wrong_password'
     },
-    
+    blankUsername: {
+      username: '',
+      password: 'secret_sauce'
+    },
+    blankPassword: {
+      username: 'standard_user',
+      password: ''
+    },
   },
   
   // product data

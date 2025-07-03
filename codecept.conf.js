@@ -28,9 +28,9 @@ exports.config = {
         restart: false, // note
       }
     },
-    CustomLoginHelper: {
-      require: './helpers/CustomLoginHelper.js'
-    }
+    // CustomLoginHelper: {
+    //   require: './helpers/CustomLoginHelper.js'
+    // }
   },
 
   include: {

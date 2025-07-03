@@ -8,22 +8,33 @@ exports.CheckoutPage = class CheckoutPage extends ProductPage {
     }
     
     async gotoCheckout() {
-        await this.I.waitForElement(locators.checkoutPage.btnCheckout, 5);
-        await this.I.click(locators.checkoutPage.btnCheckout)
+        await this.waitForVisible(locators.checkoutPage.btnCheckout, 5);
+        await this.click(locators.checkoutPage.btnCheckout)
     }
 
     async performCheckout(firstName, lastName, zipCode) {
-        await this.I.fillField(locators.checkoutPage.firstNameField, firstName);
-        await this.I.fillField(locators.checkoutPage.lastNameField, lastName);
-        await this.I.fillField(locators.checkoutPage.zipCodeField, zipCode);
-        await this.I.click(locators.checkoutPage.btnContinue);
+        await this.fillField(locators.checkoutPage.firstNameField, firstName);
+        await this.fillField(locators.checkoutPage.lastNameField, lastName);
+        await this.fillField(locators.checkoutPage.zipCodeField, zipCode);
+        await this.click(locators.checkoutPage.btnContinue);
+    }
 
+    async clickBtnFinishCheckout() {
         await ScrollUtils.scrollToElement(this.I, locators.checkoutPage.btnFinish) // scroll truoc roi moi wait for
-        await this.I.waitForElement(locators.checkoutPage.btnFinish, 5);
-        await this.I.click(locators.checkoutPage.btnFinish)
+        await this.waitForVisible(locators.checkoutPage.btnFinish, 5);
+        await this.click(locators.checkoutPage.btnFinish)
+    }
+
+    async getMgsInfo() {
+        return await this.grabText(locators.checkoutPage.msgErr)
     }
 
     async isCheckoutSuccess() {
-        return await this.I.grabTextFrom(locators.checkoutPage.msgOrderSuccess);
+        return await this.grabText(locators.checkoutPage.msgOrderSuccess);
+    }
+
+    async isInfoValid(expectedMsg) {
+        const actualMsg = await this.getMgsInfo()
+        return actualMsg === expectedMsg;
     }
 }

@@ -5,29 +5,35 @@ const { LoginPage } = require('./LoginPage');
 
 exports.ProductPage = class ProductPage extends LoginPage {
     constructor(I) {
-        super(I)
+        super(I);
     }
 
     //Add product to Cart
     async addProductToCart(productName) {
         const productXpath = `//android.widget.TextView[@content-desc="test-Item title" and contains(@text,"${productName}")]`;
-        await this.I.click(productXpath)
+        await this.click(productXpath)
         await ScrollUtils.scrollToElement(this.I,locators.productsPage.textBtnAddCart)
-        await this.I.waitForElement(locators.productsPage.btnAddCart, 3);
-        await this.I.click(locators.productsPage.btnAddCart)
+        await this.waitForVisible(locators.productsPage.btnAddCart, 3);
+        await this.click(locators.productsPage.btnAddCart)
     } 
+
+    // Back to productPage
+    async backToProductPageAfterSeeDetail() {
+        await this.click(locators.productsPage.btnBackToProduct);
+    }
+
 
     // Go to Cart Page
     async goToCart() {
-        await this.I.click(locators.productsPage.btnCartIcon)
+        await this.click(locators.productsPage.btnCartIcon)
     }
 
     // Get product volumn in cart
     async getCartVolume() {
-        const isVisible = await this.I.grabNumberOfVisibleElements(locators.productsPage.cartCount);
+        const isVisible = await this.isVisible(locators.productsPage.cartCount);
 
-        if (isVisible > 0) {
-            const count = await this.I.grabTextFrom(locators.productsPage.cartCount);
+        if (isVisible) {
+            const count = await this.grabText(locators.productsPage.cartCount);
             return count
         }
         else {

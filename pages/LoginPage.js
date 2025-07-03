@@ -11,6 +11,7 @@ exports.LoginPage = class LoginPage extends BasePage {
         await this.fillField(locators.loginPage.usernameField, username);
         await this.fillField(locators.loginPage.passwordField, password);
         await this.click(locators.loginPage.btnLogin);
+        
     }
 
     // get heading PRODUCTS
@@ -25,5 +26,10 @@ exports.LoginPage = class LoginPage extends BasePage {
         await this.I.waitForElement(locators.loginPage.msgErr, 10);
         const msgErr = await this.grabText(locators.loginPage.msgErr);
         return msgErr;
+    }
+
+    async isMsgEqual(expectedMsg) {
+        const actualMsg = await this.getMessageErr();
+        return actualMsg === expectedMsg;
     }
 }

@@ -10,12 +10,8 @@ exports.BasePage = class BasePage {
     //     await TestUtils.waitForElement(this.I, locator, timeout);
     // }
 
-    // async waitForVisible(locator, timeout = 10) {
-    //     await TestUtils.waitForVisible(this.I, locator, timeout);
-    // }
-
     async waitForVisible(locator, timeout = 10) {
-        await this.I.waitForElement(locator, timeout); 
+        await TestUtils.waitForVisible(this.I, locator, timeout);
     }
 
     async click(locator) {
@@ -32,10 +28,12 @@ exports.BasePage = class BasePage {
         await this.waitForVisible(locator);
         return await this.I.grabTextFrom(locator);
     }
+    
 
-    // async isVisible(locator) {
-    //     return await this.I.grabNumberOfVisibleElements(locator) > 0;
-    // }
+    async isVisible(locator) {
+        return await this.I.grabNumberOfVisibleElements(locator) > 0;
+    }
+
 
     // async wait(seconds) {
     //     await this.I.wait(seconds);

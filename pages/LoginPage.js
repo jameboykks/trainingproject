@@ -15,15 +15,15 @@ exports.LoginPage = class LoginPage extends BasePage {
 
     // get heading PRODUCTS
     async getHeadingProductPage() {
-        await this.I.waitForElement(locators.loginPage.headingProductPage, 5);
-        const heading = await this.I.grabTextFrom(locators.loginPage.headingProductPage);
+        await this.I.waitForElement(locators.loginPage.headingProductPage, 10);
+        const heading = await this.grabText(locators.loginPage.headingProductPage);
         return heading;
     }
     
     // get err message when login failed
     async getMessageErr() {
-        await this.I.waitForElement(locators.loginPage.msgErr, 20);
-        const msgErr = await this.I.grabTextFrom(locators.loginPage.msgErr);
+        await this.I.waitForElement(locators.loginPage.msgErr, 10);
+        const msgErr = await this.grabText(locators.loginPage.msgErr);
         return msgErr;
     }
 }

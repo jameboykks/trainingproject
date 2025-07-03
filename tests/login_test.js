@@ -11,7 +11,10 @@ Before(async ({ I }) => {
 //Login successfull
 Scenario('User login successfull and see Product page', async ({ I }) => {
 
-    await loginPage.login(testData.users.valid.username, testData.users.valid.password)
+    let username = testData.users.valid.username;
+    let password = testData.users.valid.password;
+
+    await loginPage.login(username, password)
 
     const heading = await loginPage.getHeadingProductPage()
     console.log('Heading is', heading)
@@ -21,8 +24,10 @@ Scenario('User login successfull and see Product page', async ({ I }) => {
 
 // Login failed
 Scenario('User login failed and see msg err', async ({ I }) => {
+    let username = testData.users.invalid.username;
+    let password = testData.users.invalid.password;
 
-    await loginPage.login(testData.users.invalid.username, testData.users.invalid.password)
+    await loginPage.login(username, password)
     
     const msgErr = await loginPage.getMessageErr()
     console.log('Message error is', msgErr)

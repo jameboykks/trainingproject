@@ -10,8 +10,12 @@ exports.BasePage = class BasePage {
     //     await TestUtils.waitForElement(this.I, locator, timeout);
     // }
 
+    // async waitForVisible(locator, timeout = 10) {
+    //     await TestUtils.waitForVisible(this.I, locator, timeout);
+    // }
+
     async waitForVisible(locator, timeout = 10) {
-        await TestUtils.waitForVisible(this.I, locator, timeout);
+        await this.I.waitForElement(locator, timeout); 
     }
 
     async click(locator) {

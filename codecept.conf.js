@@ -6,7 +6,7 @@ setCommonPlugins();
 /** @type {CodeceptJS.MainConfig} */
 exports.config = {
   tests: './tests/*_test.js',
-  output: './output',
+  output: './output/screenshots',
 
   helpers: {
     Appium: {
@@ -22,22 +22,19 @@ exports.config = {
         appActivity: 'com.swaglabsmobileapp.MainActivity',
         platformName: 'Android', 
         platformVersion: '16.0',
-        noReset: false,
+        noReset: false, // note
         newCommandTimeout: 600,
         appWaitDuration: 60000,
-        restart: false,
+        restart: false, // note
       }
     },
-    // CustomLoginHelper: {
-    //   require: './helpers/CustomLoginHelper.js'
-    // }
+    CustomLoginHelper: {
+      require: './helpers/CustomLoginHelper.js'
+    }
   },
 
   include: {
     I: './steps_file.js'
-  },
-  hooks: {
-    'test.before': './tests/hooks/login_hook.js'
   },
   mocha: {
     reporterOptions: {
